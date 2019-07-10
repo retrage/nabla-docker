@@ -6,24 +6,26 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
-        name: Build and push nabla-containers/rumprun
-        command: |
-          docker build -t $DOCKER_USER/nabla-rumprun rumprun-build
-          docker push $DOCKER_USER/nabla-rumprun
+          name: Login to DockerHub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
-        name: Build and push python3 in nabla-containers/rumprun-packages
-        command: |
-          docker build -t $DOCKER_USER/nabla-rumprun-python python-build
-          docker push $DOCKER_USER/nabla-rumprun-python
+          name: Build and push nabla-containers/rumprun
+          command: |
+            docker build -t $DOCKER_USER/nabla-rumprun rumprun-build
+            docker push $DOCKER_USER/nabla-rumprun
       - run:
-        name: Build and push python3 nabla container image
-        command: |
-          export ID=$(docker create $DOCKER_USER/nabla-rumprun-python)
-          export PYTHON_BUILD=/src/rumprun/rumprun-packages/python3/build
-          docker cp $ID:$PYTHON_BUILD/python.nabla image-build/python.nabla
-          docker cp $ID:$PYTHON_BUILD/pythondist/python3.5 image-build/python3.5
-          docker rm -v $ID
-          docker build -t $DOCKER_USER/nabla-python image-build
-          docker push $DOCKER_USER/nabla-python
+          name: Build and push python3 in nabla-containers/rumprun-packages
+          command: |
+            docker build -t $DOCKER_USER/nabla-rumprun-python python-build
+            docker push $DOCKER_USER/nabla-rumprun-python
+      - run:
+          name: Build and push python3 nabla container image
+          command: |
+            export ID=$(docker create $DOCKER_USER/nabla-rumprun-python)
+            export PYTHON_BUILD=/src/rumprun/rumprun-packages/python3/build
+            docker cp $ID:$PYTHON_BUILD/python.nabla image-build/python.nabla
+            docker cp $ID:$PYTHON_BUILD/pythondist/python3.5 image-build/python3.5
+            docker rm -v $ID
+            docker build -t $DOCKER_USER/nabla-python image-build
+            docker push $DOCKER_USER/nabla-python
