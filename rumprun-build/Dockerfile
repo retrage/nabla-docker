@@ -6,7 +6,8 @@ RUN apt update && apt install -y \
   git \
   gcc \
   make \
-  libseccomp-dev
+  libseccomp-dev \
+  zlib1g-dev
 
 # build solo5 rumprun
 RUN git clone https://github.com/nabla-containers/rumprun.git
