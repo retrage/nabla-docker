@@ -25,7 +25,7 @@ jobs:
             export ID=$(docker create $DOCKER_USER/nabla-rumprun-python)
             export PYTHON_BUILD=/src/rumprun/rumprun-packages/python3/build
             docker cp $ID:$PYTHON_BUILD/python.nabla image-build/python.nabla
-            docker cp $ID:$PYTHON_BUILD/pythondist/lib/python3.5 image-build/python3.5
+            docker cp $ID:$PYTHON_BUILD/pythondist image-build/python
             docker rm -v $ID
             docker build -t $DOCKER_USER/nabla-python image-build
             docker push $DOCKER_USER/nabla-python
