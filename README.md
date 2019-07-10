@@ -1,4 +1,4 @@
-# Docker Images for Nabla Containers ![CircleCI](https://circleci.com/gh/retrage/nabla-docker.svg?style=shield)
+# Docker Images for Nabla Containers [![CircleCI](https://circleci.com/gh/retrage/nabla-docker.svg?style=shield)](https://circleci.com/gh/retrage/nabla-docker)
 
 This repository contains Dockerfiles
 for reproducing Nabla Containers Docker images.
