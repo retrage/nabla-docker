@@ -7,6 +7,7 @@ RUN apt update && apt install -y \
   gcc \
   make \
   wget \
+  xz-utils \
   genisoimage
 
 # build python3 in rumprun-packages
